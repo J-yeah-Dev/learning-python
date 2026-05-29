@@ -1,0 +1,42 @@
+def word_counter(text):
+    return len(text.split())
+def char_counter(text):
+    return len(text)
+def to_uppercase(text):
+    return text.upper()
+def to_lowercase(text):
+    return text.lower()
+def reverse_text(text):
+    return text[::-1]
+
+actions = {
+    "1": word_counter,
+    "2": char_counter,
+    "3": to_uppercase,
+    "4": to_lowercase,
+    "5": reverse_text
+}
+
+
+while True:
+    print("\n==== TEXT ANALYZER MENU =====")
+    print("1. Count Words")
+    print("2. Count Characters")
+    print("3. Convert to Uppercase")
+    print("4. Convert to Lowercase")
+    print("5. Reverse text")
+    print("6. Exit")
+    
+    choice = input("Choose an option (1-6): ")
+    
+    if choice == "6":
+        print("Goodbye!")
+        break
+    
+    if choice in actions:
+        user_text = input("\nEnter your text: ")
+        result = actions[choice](user_text)
+
+        print(f"Result: {result}")
+    else:
+        print("Invalid choice. Please pick a number from 1 to 5 OR 6 to exit.")
