@@ -1,0 +1,80 @@
+class Student:
+    def __init__(self, name):
+        self.name = name  # Keeps original capitalization for display
+        self.grades = []
+
+    def add_grade(self, grade):
+        if 0 <= grade <= 100:
+            self.grades.append(grade)
+            return True
+        return False
+            
+    def calculate_average(self):
+        if not self.grades:
+            return 0
+        return sum(self.grades) / len(self.grades)
+
+
+class Tracker:
+    def __init__(self):
+        self.students = {}
+
+    def run(self):
+        while True:
+            print("\n=== STUDENT GRADING SYSTEM ===")
+            print("1. Add New Student")
+            print("2. Enter Student Grade")
+            print("3. View Student Report")
+            print("4. Exit")
+            
+            choice = input("\nChoose an option (1-4): ").strip()
+            
+            if choice == "1":
+                name = input("Enter student name: ").strip()
+                if name:
+                    key = name.lower()
+                    if key in self.students:
+                        print(f"Error: '{name}' already exists.")
+                    else:
+                        self.students[key] = Student(name)
+                        print(f"Success: Student '{name}' added successfully!")
+                
+            elif choice == "2":
+                name = input("Enter student name: ").strip()
+                key = name.lower()
+                
+                if key in self.students:
+                    try:
+                        grade = int(input(f"Enter mark for {self.students[key].name} (0-100): "))
+                        if self.students[key].add_grade(grade):
+                            print("Success: Grade recorded!")
+                        else:
+                            print("Error: Invalid grade. Must be between 0 and 100.")
+                    except ValueError:
+                        print("Error: Please enter a valid number.")
+                else:
+                    print("Error: Student not found.")
+                    
+            elif choice == "3":
+                name = input("Enter student name: ").strip()
+                key = name.lower()
+                
+                if key in self.students:
+                    student = self.students[key]
+                    avg = student.calculate_average()
+                    print(f"\nReport for {student.name}:")
+                    print(f"Grades: {student.grades}")
+                    print(f"Average: {avg:.2f}")
+                else:
+                    print("Error: Student not found.")
+                    
+            elif choice == "4":
+                print("Exiting system. Goodbye!")
+                break
+            else:
+                print("Error: Invalid selection. Try again.")
+
+
+if __name__ == "__main__":
+    program = Tracker()
+    program.run()
