@@ -1,0 +1,3 @@
+Amazon,jaydev@email.com,pass123
+Ebay,jaydev@mail.com,123456
+Orkut,jaydev@email.com,jaydev
